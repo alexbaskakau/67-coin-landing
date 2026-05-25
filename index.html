@@ -1,0 +1,412 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Space+Mono:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @keyframes flicker {
+            0% { opacity: 1; }
+            5% { opacity: 0.8; }
+            10% { opacity: 1; }
+            15% { opacity: 0.9; }
+            20% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+        .flicker-effect {
+            animation: flicker 2s infinite;
+        }
+        .glow-sm {
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+        }
+        .text-shadow-glow {
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+        }
+        .glitch-border {
+            position: relative;
+        }
+        .glitch-border::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid #39FF14;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        body {
+            background-color: #050505;
+            color: #e5e1e4;
+            overflow-x: hidden;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#053900",
+                        "outline": "#85967c",
+                        "inverse-on-surface": "#313032",
+                        "on-error": "#690005",
+                        "surface-dim": "#131315",
+                        "surface-tint": "#2ae500",
+                        "primary-container": "#39ff14",
+                        "surface-container-high": "#2a2a2c",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#2ae500",
+                        "surface-container": "#201f21",
+                        "on-primary-fixed-variant": "#095300",
+                        "on-background": "#e5e1e4",
+                        "on-tertiary-container": "#006c73",
+                        "on-tertiary": "#00363a",
+                        "on-secondary": "#3c0090",
+                        "on-surface-variant": "#baccb0",
+                        "tertiary-fixed-dim": "#00dbe9",
+                        "surface-container-lowest": "#0e0e10",
+                        "on-tertiary-fixed": "#002022",
+                        "tertiary": "#ecfdff",
+                        "on-secondary-fixed-variant": "#5700c9",
+                        "surface-charcoal": "#161721",
+                        "on-secondary-container": "#ddcdff",
+                        "surface": "#131315",
+                        "inverse-surface": "#e5e1e4",
+                        "secondary-fixed-dim": "#d1bcff",
+                        "surface-container-highest": "#353437",
+                        "primary": "#efffe3",
+                        "inverse-primary": "#106e00",
+                        "surface-variant": "#353437",
+                        "matrix-blue": "#234290",
+                        "on-secondary-fixed": "#23005b",
+                        "void-black": "#050505",
+                        "tertiary-fixed": "#7df4ff",
+                        "on-primary-container": "#107100",
+                        "surface-container-low": "#1c1b1d",
+                        "secondary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "surface-bright": "#39393b",
+                        "primary-fixed": "#79ff5b",
+                        "secondary-container": "#7000ff",
+                        "cyber-purple": "#7000FF",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#55f2ff",
+                        "glitch-green": "#39FF14",
+                        "secondary": "#d1bcff",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e1e4",
+                        "on-primary-fixed": "#022100",
+                        "warning-yellow": "#FFE814",
+                        "background": "#131315",
+                        "outline-variant": "#3c4b35"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "section-gap": "80px",
+                        "gutter": "16px",
+                        "element-gap": "12px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "stats-lg": ["JetBrains Mono"],
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "headline-xl": ["Sora"],
+                        "body-lg": ["JetBrains Mono"],
+                        "body-md": ["JetBrains Mono"],
+                        "label-caps": ["Space Mono"]
+                    },
+                    "fontSize": {
+                        "stats-lg": ["24px", {"lineHeight": "1", "letterSpacing": "-0.05em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-void-black text-on-background selection:bg-glitch-green selection:text-void-black">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-glitch-green/20 shadow-[0_0_15px_rgba(57,255,20,0.2)]">
+<div class="flex justify-between items-center px-gutter py-4 max-w-[1280px] mx-auto">
+<div class="font-headline-md text-headline-md font-black tracking-tighter text-glitch-green">6-7</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-glitch-green transition-colors hover:glow-sm hover:scale-105 transition-all" href="#mythology">Mythology</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-glitch-green transition-colors hover:glow-sm hover:scale-105 transition-all" href="#timeline">Timeline</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-glitch-green transition-colors hover:glow-sm hover:scale-105 transition-all" href="#tokenomics">Tokenomics</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-glitch-green transition-colors hover:glow-sm hover:scale-105 transition-all" href="#community">Community</a>
+</div>
+<button class="bg-glitch-green text-on-primary px-6 py-2 font-label-caps text-label-caps font-bold hover:glow-sm hover:scale-105 transition-all active:opacity-80">
+                BUY 6-7
+            </button>
+</div>
+</nav>
+<main class="mt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-container-margin overflow-hidden"><div class="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none overflow-hidden">
+<img alt="6-7 Anomaly Visual" class="w-full max-w-[800px] object-contain filter drop-shadow-[0_0_30px_rgba(57,255,20,0.5)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLDgNtp0Z6ndDtlIpQPK1k4XggVnadrlEo31092UFuClIs13Ua6XeN2enR8ZpkVkpkqjIpQ5QujsMs0kzAMMcYux5Xu6KhRFM_nQb4zZsOznytJ5uxse67EhN4ovwHyrA-SLhsDB5_X-JwACGdZFSgPdP7Qq8CjnGBaLSxH19fHl8XDR0YrDrEJogSEgzwEMpTLIETUMLPKdaH2v0is0NFo8O3lLHKnyrgRmoq-CUJZpm5ghzXOMoD7dIqGMgMTa9m42lljE2O4NI">
+</div>
+<!-- Background Ambient Glow -->
+<div class="absolute inset-0 z-0 pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-glitch-green/10 blur-[120px] rounded-full"></div>
+</div>
+<div class="relative z-10 space-y-6 max-w-4xl">
+<h1 class="font-headline-xl text-headline-xl text-glitch-green tracking-tighter leading-none flicker-effect text-shadow-glow"><br></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    The ultimate mathematical anomaly on Base. No rules, just 6-7.
+                </p>
+<div class="flex flex-col items-center gap-4 py-4 animate-pulse">
+<p class="font-label-caps text-label-caps text-glitch-green tracking-[0.3em] uppercase glow-sm font-black">Support kid's fun</p>
+<p class="font-label-caps text-label-caps text-glitch-green tracking-[0.1em] uppercase font-bold mb-2">Launch in:</p><div class="flex gap-4 md:gap-8 items-center" id="hero-countdown">
+<div class="flex flex-col items-center">
+<span class="font-stats-lg text-4xl md:text-5xl text-glitch-green text-shadow-glow days">06</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Days</span>
+</div>
+<span class="font-stats-lg text-2xl text-glitch-green/50">:</span>
+<div class="flex flex-col items-center">
+<span class="font-stats-lg text-4xl md:text-5xl text-glitch-green text-shadow-glow hours">03</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Hours</span>
+</div>
+<span class="font-stats-lg text-2xl text-glitch-green/50">:</span>
+<div class="flex flex-col items-center">
+<span class="font-stats-lg text-4xl md:text-5xl text-glitch-green text-shadow-glow minutes">23</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Min</span>
+</div>
+<span class="font-stats-lg text-2xl text-glitch-green/50">:</span>
+<div class="flex flex-col items-center">
+<span class="font-stats-lg text-4xl md:text-5xl text-glitch-green text-shadow-glow seconds">26</span>
+<span class="font-label-caps text-[10px] text-outline uppercase">Sec</span>
+</div>
+</div>
+</div><div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+<a class="bg-glitch-green text-on-primary px-10 py-4 font-label-caps text-label-caps font-extrabold flex items-center gap-2 hover:glow-sm transition-all group" href="#">
+                        BUY $67 ON APE.STORE
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">shopping_cart</span>
+</a>
+<div class="flex gap-4">
+<a class="w-12 h-12 border border-glitch-green/40 flex items-center justify-center hover:bg-glitch-green/10 transition-all text-glitch-green" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-12 h-12 border border-glitch-green/40 flex items-center justify-center hover:bg-glitch-green/10 transition-all text-glitch-green" href="#">
+<span class="material-symbols-outlined">send</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+<span class="material-symbols-outlined text-glitch-green opacity-50">keyboard_double_arrow_down</span>
+</div>
+</section>
+<!-- About Section (Meme Mythology) -->
+<section class="py-section-gap px-container-margin max-w-[1280px] mx-auto" id="mythology">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-gutter">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-glitch-green mb-2">MEME MYTHOLOGY</h2>
+<p class="font-body-md text-body-md text-outline">Decrypting the anomaly code.</p>
+</div>
+<!-- Dev Buy verified badge -->
+<div class="flex items-center gap-2 bg-matrix-blue/20 border border-cyber-purple/50 px-4 py-2 rounded-lg">
+<span class="material-symbols-outlined text-cyber-purple" style="font-variation-settings: &quot;FILL&quot; 1;">verified</span>
+<span class="font-label-caps text-label-caps text-cyber-purple">DEV BUY VERIFIED</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-element-gap">
+<!-- Card 1 -->
+<div class="bg-surface-charcoal border border-glitch-green/20 p-8 space-y-4 hover:border-glitch-green/60 transition-all group relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px]" data-icon="functions">functions</span>
+</div>
+<div class="w-12 h-12 bg-glitch-green/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-glitch-green" data-icon="terminal">terminal</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-glitch-green">The Anomaly</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Mathematics broke when 6 met 7. A glitch in the matrix spawned the ultimate degen divisor.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-charcoal border border-glitch-green/20 p-8 space-y-4 hover:border-glitch-green/60 transition-all group relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px]" data-icon="layers">layers</span>
+</div>
+<div class="w-12 h-12 bg-glitch-green/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-glitch-green" data-icon="database">database</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-glitch-green">Base Layer</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Built on the bedrock of Base. High speed, low fees, maximum chaos for the on-chain natives.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-charcoal border border-glitch-green/20 p-8 space-y-4 hover:border-glitch-green/60 transition-all group relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[64px]" data-icon="calculate">calculate</span>
+</div>
+<div class="w-12 h-12 bg-glitch-green/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-glitch-green" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-glitch-green">Degenerate Logic</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">6+7=67 in this universe. We don't do standard arithmetic, we only do moon math.</p>
+</div>
+</div>
+</section>
+<!-- How to Buy Section -->
+<section class="py-section-gap bg-surface/30" id="timeline">
+<div class="max-w-[800px] mx-auto px-container-margin">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-glitch-green mb-4">ACCESS PROTOCOL</h2>
+<p class="font-body-md text-body-md text-outline">Follow these steps to acquire the anomaly.</p>
+</div>
+<div class="relative space-y-12">
+<!-- Timeline Line -->
+<div class="absolute left-6 top-2 bottom-2 w-px border-l border-dashed border-glitch-green/40"></div>
+<!-- Step 1 -->
+<div class="relative flex items-start gap-8 group">
+<div class="flex-shrink-0 w-12 h-12 bg-void-black border border-glitch-green flex items-center justify-center z-10 group-hover:glow-sm transition-all">
+<span class="font-stats-lg text-stats-lg text-glitch-green">01</span>
+</div>
+<div class="pt-2">
+<h4 class="font-headline-md text-headline-md text-glitch-green mb-1">Install Coinbase Wallet</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Secure your gateway to the Base network. Desktop extension or mobile app works.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex items-start gap-8 group">
+<div class="flex-shrink-0 w-12 h-12 bg-void-black border border-glitch-green flex items-center justify-center z-10 group-hover:glow-sm transition-all">
+<span class="font-stats-lg text-stats-lg text-glitch-green">02</span>
+</div>
+<div class="pt-2">
+<h4 class="font-headline-md text-headline-md text-glitch-green mb-1">Load ETH on Base</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Bridge your ETH to Base network or buy directly via Coinbase.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex items-start gap-8 group">
+<div class="flex-shrink-0 w-12 h-12 bg-void-black border border-glitch-green flex items-center justify-center z-10 group-hover:glow-sm transition-all">
+<span class="font-stats-lg text-stats-lg text-glitch-green">03</span>
+</div>
+<div class="pt-2">
+<h4 class="font-headline-md text-headline-md text-glitch-green mb-1">Connect to Ape.store</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Head over to the launchpad and connect your wallet securely.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex items-start gap-8 group">
+<div class="flex-shrink-0 w-12 h-12 bg-void-black border border-glitch-green flex items-center justify-center z-10 group-hover:glow-sm transition-all">
+<span class="font-stats-lg text-stats-lg text-glitch-green">04</span>
+</div>
+<div class="pt-2">
+<h4 class="font-headline-md text-headline-md text-glitch-green mb-1">Swap for $67</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Execute the transaction and witness the anomaly in your portfolio.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tokenomics Section -->
+<section class="py-section-gap px-container-margin max-w-[1280px] mx-auto" id="tokenomics">
+<h2 class="font-headline-lg text-headline-lg text-glitch-green mb-12 text-center">TOKENOMICS</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Liquidity Block -->
+<div class="bg-glitch-green text-on-primary p-10 flex flex-col items-center justify-center text-center space-y-4 transform hover:-rotate-1 transition-transform">
+<span class="material-symbols-outlined text-4xl" data-icon="lock">lock</span>
+<span class="font-stats-lg text-stats-lg">100%</span>
+<p class="font-label-caps text-label-caps font-bold">Liquidity Locked</p>
+</div>
+<!-- Tax Block -->
+<div class="bg-surface-charcoal border-2 border-glitch-green p-10 flex flex-col items-center justify-center text-center space-y-4 transform hover:rotate-1 transition-transform">
+<span class="material-symbols-outlined text-glitch-green text-4xl" data-icon="money_off">money_off</span>
+<span class="font-stats-lg text-stats-lg text-glitch-green">0%</span>
+<p class="font-label-caps text-label-caps text-glitch-green font-bold">Buy/Sell Taxes</p>
+</div>
+<!-- Launch Block -->
+<div class="bg-cyber-purple text-white p-10 flex flex-col items-center justify-center text-center space-y-4 transform hover:-rotate-1 transition-transform">
+<span class="material-symbols-outlined text-4xl" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-stats-lg text-stats-lg">FAIR</span>
+<p class="font-label-caps text-label-caps font-bold">Bonding Curve Launch</p>
+</div>
+</div>
+<!-- Terminal Quote -->
+<div class="mt-16 p-6 border-l-4 border-glitch-green bg-surface-charcoal font-body-md text-body-md italic opacity-80 max-w-2xl mx-auto">
+                "The numbers don't lie, they just glitch. 6-7 is the constant in an unstable market."
+            </div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap border-t border-glitch-green/10 bg-void-black">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-margin max-w-[1280px] mx-auto gap-element-gap">
+<div class="flex flex-col items-center md:items-start gap-2">
+<div class="font-headline-md text-headline-md text-glitch-green">6-7</div>
+<p class="font-body-md text-body-md text-outline text-center md:text-left">© 2024 6-7 ON BASE. NO INTRINSIC VALUE. DYOR.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-md text-body-md text-outline hover:text-glitch-green transition-colors hover:text-shadow-glow" href="#">Contract</a>
+<a class="font-body-md text-body-md text-outline hover:text-glitch-green transition-colors hover:text-shadow-glow" href="#">Twitter</a>
+<a class="font-body-md text-body-md text-outline hover:text-glitch-green transition-colors hover:text-shadow-glow" href="#">Telegram</a>
+<a class="font-body-md text-body-md text-outline hover:text-glitch-green transition-colors hover:text-shadow-glow" href="#">DexScreener</a>
+</div>
+</div>
+</footer>
+<!-- Interactive Glitch Effect Micro-script -->
+<script>
+        document.querySelectorAll('h1, h2, h3').forEach(el => {
+            el.addEventListener('mouseover', () => {
+                const original = el.innerText;
+                const chars = "6701!@#$%^&*";
+                let iterations = 0;
+                
+                const interval = setInterval(() => {
+                    el.innerText = el.innerText.split("")
+                        .map((char, index) => {
+                            if(index < iterations) return original[index];
+                            return chars[Math.floor(Math.random() * chars.length)];
+                        }).join("");
+                    
+                    if(iterations >= original.length) clearInterval(interval);
+                    iterations += 1/3;
+                }, 30);
+            });
+        });
+    </script>
+<script>
+    (function() {
+        const countdownDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+        const timerContainer = document.getElementById('hero-countdown');
+        
+        const updateTimer = () => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            if (distance < 0) return;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            timerContainer.querySelector('.days').innerText = days.toString().padStart(2, '0');
+            timerContainer.querySelector('.hours').innerText = hours.toString().padStart(2, '0');
+            timerContainer.querySelector('.minutes').innerText = minutes.toString().padStart(2, '0');
+            timerContainer.querySelector('.seconds').innerText = seconds.toString().padStart(2, '0');
+        };
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    })();
+</script>
+
+
+
+</body></html>
