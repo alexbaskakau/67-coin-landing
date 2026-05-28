@@ -381,15 +381,23 @@
         });
     </script>
 <script>
-    (function() {
-        const countdownDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+        (function() {
+        // Установили фиксированную дату вместо динамического прибавления дней
+        const countdownDate = new Date("Jun 5, 2026 18:00:00 GMT+0300").getTime();
         const timerContainer = document.getElementById('hero-countdown');
         
         const updateTimer = () => {
             const now = new Date().getTime();
             const distance = countdownDate - now;
             
-            if (distance < 0) return;
+            // Если таймер истек, принудительно выводим нули
+            if (distance < 0) {
+                timerContainer.querySelector('.days').innerText = '00';
+                timerContainer.querySelector('.hours').innerText = '00';
+                timerContainer.querySelector('.minutes').innerText = '00';
+                timerContainer.querySelector('.seconds').innerText = '00';
+                return;
+            }
             
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
