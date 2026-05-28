@@ -36,6 +36,12 @@
             opacity: 0.3;
             pointer-events: none;
         }
+        .material-symbols-outlined {
+    unicode-bidi: bidi-override;
+    /* Запрещаем перевод для всего класса иконок */
+    -webkit-user-select: none;
+    user-select: none;
+}
         body {
             background-color: #050505;
             color: #e5e1e4;
